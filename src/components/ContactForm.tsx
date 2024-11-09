@@ -4,15 +4,17 @@ import Input from "./Input";
 import { Contact, contactSchema } from "../schemas/ContactSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type Props = {};
+type Props = {
+  onSubmit: (contact: Contact) => void;
+};
 
-function ContactForm({}: Props) {
+function ContactForm({ onSubmit }: Props) {
   const methods = useForm<Contact>({
-    resolver: zodResolver(contactSchema)
+    resolver: zodResolver(contactSchema),
   });
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit((data) => console.log(data))}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Input name="name">Nombre:</Input>
         <Input name="lastname">Apellido:</Input>
         <Input name="email">Correo:</Input>
