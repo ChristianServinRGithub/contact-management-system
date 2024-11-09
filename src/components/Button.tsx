@@ -1,13 +1,14 @@
-import { ReactNode } from "react"
+import { ReactNode } from "react";
+
+type variant = "primary" | "secondary" | "warning";
 
 type Props = {
-    children: ReactNode
+  children: ReactNode;
+  variant?: variant;
+};
+
+function Button({ children, variant = "primary" }: Props) {
+  return <button className={`btn btn-${variant}`}>{children}</button>;
 }
 
-function Button({children}: Props) {
-  return (
-    <button>{children}</button>
-  )
-}
-
-export default Button
+export default Button;

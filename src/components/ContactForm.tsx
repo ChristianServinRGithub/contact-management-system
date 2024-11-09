@@ -1,30 +1,20 @@
+import { FormProvider, useForm } from "react-hook-form";
 import Button from "./Button";
+import Input from "./Input";
 
 type Props = {};
 
 function ContactForm({}: Props) {
+  const methods = useForm();
   return (
-    <form onSubmit={() => console.log("Hola")}>
-      <div className="mb-3">
-        <label htmlFor="name" className="form-label">
-          Nombre:
-        </label>
-        <input type="text" id="name" className="form-control" placeholder="Escribe tu nombre" />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="lastname" className="form-label">
-          Apellido:
-        </label>
-        <input type="text" id="lastname" className="form-control"placeholder="Escribe tu apellido" />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Correo:
-        </label>
-        <input type="text" id="email" className="form-control" placeholder="Escribe tu Correo" />
-      </div>
-      <Button>Enviar</Button>
-    </form>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit((data) => console.log(data))}>
+        <Input name="name">Nombre:</Input>
+        <Input name="lastname">Apellido:</Input>
+        <Input name="email">Correo:</Input>
+        <Button>Enviar</Button>
+      </form>
+    </FormProvider>
   );
 }
 
